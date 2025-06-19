@@ -16,10 +16,10 @@ runs:
   steps:
     - name: Greet the visitor
       id: greet-visitor
-      run: echo "Hello $INPUT_VISITOR."
-      shell: bash
       env:
-        INPUT_WHO_TO_GREET: ${{ inputs.visitor }}
+        INPUT_VISITOR: ${{ inputs.visitor }}
+      shell: bash
+      run: echo "Hello $INPUT_VISITOR."
 
     - name: Generate a random number
       id: random-number-generator
