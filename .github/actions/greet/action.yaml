@@ -19,7 +19,7 @@ runs:
       run: echo "Hello $INPUT_VISITOR."
       shell: bash
       env:
-        INPUT_WHO_TO_GREET: ${{ inputs.who-to-greet }}
+        INPUT_WHO_TO_GREET: ${{ inputs.visitor }}
 
     - name: Generate a random number
       id: random-number-generator
