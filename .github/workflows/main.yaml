@@ -1,0 +1,21 @@
+name: Main Workflow
+on: workflow_dispatch
+
+jobs:
+  example:
+    runs-on: ubuntu-latest
+    name: Example Jobs
+    steps:
+      - id: checkout
+        uses: actions/checkout@v4
+      - id: greet
+        name: Run the greet composite action
+        uses: ./.github/actions/greet.yaml
+        with:
+          visitor: "The Spanish Inquisition"
+      - id: show
+        name: Show random number
+        run: echo random-number "$RANDOM_NUMBER"
+        shell: bash
+        env:
+          RANDOM_NUMBER: ${{ steps.greet.outputs.random-number }}
