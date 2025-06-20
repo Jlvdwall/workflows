@@ -1,6 +1,5 @@
 name: Jobs Workflow
 on: workflow_call
-continue-on-error: true
 
 jobs:
   JOB1:
