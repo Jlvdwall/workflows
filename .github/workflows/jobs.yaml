@@ -12,10 +12,10 @@ jobs:
   JOB2:
     runs-on: ubuntu-latest
     needs: [JOB1]
+    if: ${{ !cancelled() && failure() }}
     steps:
       - run: |
           echo ${{ needs.JOB1.result }}
-          echo ${{ failure() }}
 
   # JOB3:
   #   runs-on: ubuntu-latest
