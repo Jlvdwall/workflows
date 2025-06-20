@@ -15,6 +15,8 @@ jobs:
     steps:
       - run: |
           echo ${{ needs.JOB1.result }}
+          echo ${{ needs.JOB1.outcome }}
+          echo ${{ failure() }}
 
   # JOB3:
   #   runs-on: ubuntu-latest
