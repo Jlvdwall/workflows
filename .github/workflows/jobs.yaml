@@ -9,6 +9,10 @@ jobs:
         continue-on-error: true
         run: |
           cat does-not-exist
+      - run: |
+          echo ${{ steps.potentially-failing.outcome }}
+          echo ${{ steps.potentially-failing.conclusion }}
+          echo ${{ steps.potentially-failing.result }}
 
   JOB2:
     runs-on: ubuntu-latest
@@ -17,8 +21,6 @@ jobs:
     steps:
       - run: |
           echo ${{ needs.JOB1.result }}
-          echo ${{ needs.JOB1.outcome }}
-          echo ${{ needs.JOB1.conclusion }}
 
   # JOB3:
   #   runs-on: ubuntu-latest
