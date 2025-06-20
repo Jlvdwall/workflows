@@ -9,9 +9,11 @@ jobs:
       failed-result:
     steps:
       - run: |
-          echo "failed-result=true" >> $GITHUB_OUTPUT
+          echo "failed-result='true'" >> $GITHUB_OUTPUT
+      - run: |
           cat does-not-exist
-          echo "failed-result=false" >> $GITHUB_OUTPUT
+      - run: |
+          echo "failed-result='false'" >> $GITHUB_OUTPUT
 
   JOB2:
     runs-on: ubuntu-latest
