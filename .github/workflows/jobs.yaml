@@ -4,22 +4,25 @@ on: workflow_call
 jobs:
   JOB1:
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - run: |
           cat does-not-exist
 
   JOB2:
     runs-on: ubuntu-latest
-    needs: JOB1
-    if: ${{ !cancelled() && needs.JOB1.result == 'failure' }}
+    continue-on-error: true
+    needs: [JOB1]
+    if: ${{ needs.JOB1.result == 'failure' }}
     steps:
       - run: |
           cat does-not-exist
 
   JOB3:
     runs-on: ubuntu-latest
-    needs: JOB2
-    if: ${{ !cancelled() && needs.JOB2.result == 'failure' }}
+    continue-on-error: true
+    needs: [JOB1, JOB2]
+    if: ${{ needs.JOB1.result == 'failure' && needs.JOB2.result == 'failure' }}
     steps:
       - run: |
           touch does-exist
