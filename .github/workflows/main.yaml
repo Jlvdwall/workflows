@@ -1,5 +1,5 @@
 name: Main Workflow
-on: [push, workflow_dispatch]
+on: push
 
 jobs:
   example:
@@ -20,3 +20,11 @@ jobs:
           RANDOM_NUMBER: ${{ steps.greet.outputs.random-number }}
         shell: bash
         run: echo random-number "$RANDOM_NUMBER"
+
+  greet:
+    runs-on: ubuntu-latest
+    needs: example
+    name: Example Specific Job
+    uses: ./.github/actions/greet
+    with:
+      visitor: "Morpheus"

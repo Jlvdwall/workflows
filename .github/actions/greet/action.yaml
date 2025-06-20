@@ -23,5 +23,5 @@ runs:
 
     - name: Generate a random number
       id: random-number-generator
-      run: echo "random-number=$(echo $RANDOM)" >> $GITHUB_OUTPUT
       shell: bash
+      run: echo "random-number=$(echo $RANDOM)" >> $GITHUB_OUTPUT
