@@ -16,7 +16,7 @@ jobs:
   JOB2:
     runs-on: ubuntu-latest
     needs: [JOB1]
-    #if: ${{ !cancelled() && needs.JOB1.outputs.failed-result }}
+    if: ${{ !cancelled() }}
     steps:
       - run: |
           echo ${{ needs.JOB1.result }}
