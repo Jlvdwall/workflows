@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: true
     needs: [JOB1]
-    if: ${{ needs.JOB1.result == 'failure' }}
+    if: ${{ !cancelled() && needs.JOB1.result == 'failure' }}
     steps:
       - run: |
           cat does-not-exist
@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: true
     needs: [JOB1, JOB2]
-    if: ${{ needs.JOB1.result == 'failure' && needs.JOB2.result == 'failure' }}
+    if: ${{ !cancelled() && needs.JOB1.result == 'failure' && needs.JOB2.result == 'failure' }}
     steps:
       - run: |
           touch does-exist
