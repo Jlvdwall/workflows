@@ -2,7 +2,7 @@ name: Main Workflow
 on: push
 
 jobs:
-  example:
+  EXAMPLE:
     runs-on: ubuntu-latest
     name: Example Jobs
     steps:
@@ -21,31 +21,13 @@ jobs:
         shell: bash
         run: echo random-number "$RANDOM_NUMBER"
 
-  JOB1:
-    runs-on: ubuntu-latest
-    steps:
-      - run: |
-          cat does-not-exist
+  JOBS:
+    uses: ./.github/workflows/jobs.yaml
 
-  JOB2:
+  FINAL:
     runs-on: ubuntu-latest
-    needs: JOB1
-    if: ${{ always() && needs.JOB1.result == 'failure' }}
-    steps:
-      - run: |
-          cat does-not-exist
-
-  JOB3:
-    runs-on: ubuntu-latest
-    needs: JOB2
-    if: ${{ needs.JOB2.result == 'failure' }}
-    steps:
-      - run: |
-          touch does-exist
-
-  JOB4:
-    runs-on: ubuntu-latest
-    needs: JOB3
+    needs:
+      JOBS
     steps:
       - run: |
           touch does-exist
