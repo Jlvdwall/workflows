@@ -29,6 +29,7 @@ jobs:
         run: |
           false
           echo "false1"
+          false
       - shell: bash
         run: |
           false
