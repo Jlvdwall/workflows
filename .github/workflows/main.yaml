@@ -25,11 +25,11 @@ jobs:
     runs-on: ubuntu-latest
     name: Another Job
     steps:
-      - shell: bash
+      - shell: bash -l {0}
         run: |
           false
           echo "false1"
-      - shell: bash -l {0}
+      - shell: bash
         run: |
           false
           echo "false2"
