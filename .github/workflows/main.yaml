@@ -4,7 +4,7 @@ on: push
 jobs:
   example:
     runs-on: ubuntu-latest
-    name: Example Jobs
+    name: Example Job
     steps:
       - id: checkout
         name: Checkout the repository
@@ -20,3 +20,16 @@ jobs:
           RANDOM_NUMBER: ${{ steps.greet.outputs.random-number }}
         shell: bash
         run: echo random-number "$RANDOM_NUMBER"
+
+  another:
+    runs-on: ubuntu-latest
+    name: Another Job
+    steps:
+      - shell: bash
+        run: |
+          false
+          echo "false1"
+      - shell: bash -l {0}
+        run: |
+          false
+          echo "false2"
