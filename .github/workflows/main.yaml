@@ -27,7 +27,8 @@ jobs:
         value: ${{ steps.echo.outputs.instance-name-echoed }}
 
   ATTEMPT:
-    runs-on: ${{ jobs.EXAMPLE.outputs.created }}
+    needs: EXAMPLE
+    runs-on: ${{ needs.EXAMPLE.outputs.created }}
     steps:
       - id: verify
         run: lsb_release -a
