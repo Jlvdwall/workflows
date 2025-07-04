@@ -1,19 +1,19 @@
 name: Main Workflow
 on: push
+inputs:
+  maxRetries:
+    required: false
+    default: 2
+    type: integer
+  retryInterval:
+    required: false
+    default: 5  # seconds
+    type: integer
 
 jobs:
   example:
     runs-on: ubuntu-latest
     name: Example Job
-    inputs:
-      maxRetries:
-        required: false
-        default: 2
-        type: integer
-      retryInterval:
-        required: false
-        default: 5  # seconds
-        type: integer
     steps:
       - id: checkout
         name: Checkout the repository
