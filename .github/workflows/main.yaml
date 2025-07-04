@@ -5,6 +5,15 @@ jobs:
   example:
     runs-on: ubuntu-latest
     name: Example Job
+    inputs:
+      maxRetries:
+        required: false
+        default: 2
+        type: integer
+      retryInterval:
+        required: false
+        default: 5  # seconds
+        type: integer
     steps:
       - id: checkout
         name: Checkout the repository
@@ -20,6 +29,30 @@ jobs:
           RANDOM_NUMBER: ${{ steps.greet.outputs.random-number }}
         shell: bash
         run: echo random-number "$RANDOM_NUMBER"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - id:
+        shell: bash
+        run:
+          delay=${{ example.inputs.retryInterval }}
+          count=0
+          return_value=1
+          while [ $count -lt ${{ example.inputs.maxRetries }} ] :
+          do
+            count=$((count + 1))
+            stdout_value=$(python run.py)
+            return_value=$?
+            if [ $return_value -eq 0 ]; then
+              echo "(+) success"
+              echo "$stdout_value"
+              break
+            else
+              echo "(-) failure, trying again in ${delay} seconds"
+              sleep $delay
+            fi
+          done
+          exit $return_value
 
   another:
     runs-on: ubuntu-latest
