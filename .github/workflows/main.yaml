@@ -1,5 +1,5 @@
 name: Main Workflow
-on: workflow_call
+on: workflow_run
 inputs:
   maxRetries:
     required: false
