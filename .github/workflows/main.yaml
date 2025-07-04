@@ -1,6 +1,6 @@
 name: Main Workflow
 on:
-  worflow_dispatch:
+  workflow_dispatch:
     inputs:
       maxRetries:
         required: false
