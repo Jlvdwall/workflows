@@ -48,7 +48,10 @@ jobs:
           while [[ $count -lt $count_maximum ]];
           do
             count=$((count + 1))
-            stdout_value=$(python ${{ inputs.script }})
+            stdout_value=$( \
+              python \
+              ${{ inputs.script }} \
+            )
             return_value=$?
             if [[ $return_value -eq 0 ]]; then
               echo "(+) success"
