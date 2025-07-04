@@ -79,7 +79,7 @@ jobs:
     needs: example
     steps:
       - run: |
-          echo ${{ jobs.example.outputs.instanceId }}
+          echo ${{ needs.example.outputs.instanceId }}
 
   # another:
   #   runs-on: ubuntu-latest
