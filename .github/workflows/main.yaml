@@ -37,8 +37,9 @@ jobs:
         run:
           delay=${{ example.inputs.retryInterval }}
           count=0
+          count_maximum=${{ example.inputs.maxRetries }}
           return_value=1
-          while [ $count -lt ${{ example.inputs.maxRetries }} ] :
+          while [ $count -lt $count_maximum ] :
           do
             count=$((count + 1))
             stdout_value=$(python run.py)
