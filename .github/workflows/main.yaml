@@ -76,7 +76,6 @@ jobs:
           exit $return_value
       - run: |
           echo ${{ steps.retry-loop.outputs.instanceId }}
-          echo ${{ outputs.instanceId }}
 
   # another:
   #   runs-on: ubuntu-latest
