@@ -14,10 +14,10 @@ on:
         required: false
         default: "run.py"
         type: string
-    # outputs:
-    #   instanceId:
-    #     description: "AWS EC2 instance ID of the self-hosted runner"
-    #     value: ${{ jobs.example.outputs.instanceId }}
+outputs:
+  instanceId:
+    description: "AWS EC2 instance ID of the self-hosted runner"
+    value: ${{ jobs.example.outputs.instanceId }}
 
 jobs:
   example:
@@ -74,8 +74,12 @@ jobs:
             fi
           done
           exit $return_value
+
+  printer:
+    needs: example
+    steps:
       - run: |
-          echo ${{ steps.retry-loop.outputs.instanceId }}
+          echo ${{ jobs.example.outputs.instanceId }}
 
   # another:
   #   runs-on: ubuntu-latest
