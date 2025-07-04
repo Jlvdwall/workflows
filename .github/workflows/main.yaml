@@ -41,6 +41,7 @@ jobs:
         name: retry-loop
         shell: bash -l {0}
         run: |
+          # FOO
           delay=${{ inputs.retryInterval }}
           count=0
           count_maximum=${{ inputs.maxRetries }}
