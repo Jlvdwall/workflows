@@ -35,9 +35,9 @@ jobs:
       - id:
         shell: bash
         run:
-          delay=${{ example.inputs.retryInterval }}
+          delay=${{ inputs.retryInterval }}
           count=0
-          count_maximum=${{ example.inputs.maxRetries }}
+          count_maximum=${{ inputs.maxRetries }}
           return_value=1
           while [ $count -lt $count_maximum ];
           do
