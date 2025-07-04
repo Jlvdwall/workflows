@@ -34,7 +34,7 @@ jobs:
         with:
           python-version: '3.10'
       - id: retry-loop
-        shell: bash
+        shell: bash -l {0}
         run: |
           echo "${{ inputs.retryInterval }}"
           echo "${{ inputs.maxRetries }}"
