@@ -14,11 +14,17 @@ on:
         required: false
         default: "run.py"
         type: string
+    outputs:
+      instanceId:
+        description: "AWS EC2 instance ID of the self-hosted runner"
+        value: ${{ jobs.example.outputs.instanceId }}
 
 jobs:
   example:
     runs-on: ubuntu-latest
     name: Example Job
+    outputs:
+      instanceId: ${{ steps.retry-loop.outputs.instanceId }}
     steps:
       - id: checkout
         name: Checkout the repository
@@ -57,6 +63,8 @@ jobs:
             if [[ $return_value -eq 0 ]]; then
               echo "(+) success"
               echo "$stdout_value"
+              instance_id=$(echo "$stdout_value" | jq -r .Instances.[0].InstanceId)
+              echo "instanceId=$instance_id" >> $GITHUB_OUTPUT
               break
             elif [[ $count -eq $count_maximum ]]; then
               echo "(-) failure, tried ${count} times"
@@ -66,6 +74,9 @@ jobs:
             fi
           done
           exit $return_value
+      - run: |
+          echo ${{ steps.retry-loop.outputs.instanceId }}
+          echo ${{ outputs.instanceId }}
 
   # another:
   #   runs-on: ubuntu-latest
