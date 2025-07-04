@@ -40,16 +40,16 @@ jobs:
           count=0
           count_maximum=${{ inputs.maxRetries }}
           return_value=1
-          while [ $count -lt $count_maximum ];
+          while [[ $count -lt $count_maximum ]];
           do
             count=$((count + 1))
             stdout_value=$(python run.py)
             return_value=$?
-            if [ $return_value -eq 0 ]; then
+            if [[ $return_value -eq 0 ]]; then
               echo "(+) success"
               echo "$stdout_value"
               break
-            elif [ $count -eq $count_maximum ]; then
+            elif [[ $count -eq $count_maximum ]]; then
               echo "(-) failure, tried ${count} times"
             else
               echo "(-) failure, trying again in ${delay} seconds"
