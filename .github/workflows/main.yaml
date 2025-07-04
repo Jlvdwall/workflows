@@ -77,6 +77,7 @@ jobs:
 
   printer:
     needs: example
+    runs-on: ubuntu22.04
     steps:
       - run: |
           echo ${{ needs.example.outputs.instanceId }}
