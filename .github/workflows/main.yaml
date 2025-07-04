@@ -14,10 +14,10 @@ on:
         required: false
         default: "run.py"
         type: string
-    outputs:
-      instanceId:
-        description: "AWS EC2 instance ID of the self-hosted runner"
-        value: ${{ jobs.example.outputs.instanceId }}
+    # outputs:
+    #   instanceId:
+    #     description: "AWS EC2 instance ID of the self-hosted runner"
+    #     value: ${{ jobs.example.outputs.instanceId }}
 
 jobs:
   example:
