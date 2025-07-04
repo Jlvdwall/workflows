@@ -1,6 +1,6 @@
 name: Main Workflow
 on:
-  push:
+  worflow_dispatch:
     inputs:
       maxRetries:
         required: false
