@@ -1,14 +1,15 @@
 name: Main Workflow
-on: workflow_dispatch
-inputs:
-  maxRetries:
-    required: false
-    default: 2
-    type: integer
-  retryInterval:
-    required: false
-    default: 5  # seconds
-    type: integer
+on:
+  push:
+    inputs:
+      maxRetries:
+        required: false
+        default: 2
+        type: integer
+      retryInterval:
+        required: false
+        default: 5  # seconds
+        type: integer
 
 jobs:
   example:
