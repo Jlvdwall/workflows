@@ -8,7 +8,9 @@ jobs:
     steps:
       - id: checkout
         name: Checkout the repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4µ
+        with:
+          fetch-depth: 0
       - id: greet
         name: Run the greet composite action
         uses: ./.github/actions/greet
@@ -18,7 +20,7 @@ jobs:
         run: |
           git config --local user.name actions[bot]
           git config --local user.email "actions@github.com"
-          git checkout -b random
+          git checkout random
           echo "${{ steps.greet.outputs.random-number }}" >> random.txt
 
           git add random.txt
