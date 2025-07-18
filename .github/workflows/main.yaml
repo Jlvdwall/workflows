@@ -16,10 +16,15 @@ jobs:
           visitor: "The Spanish Inquisition"
       - id: commit
         run: |
+          git config --local user.name actions[bot]
+          git config --local user.email "actions@github.com"
+
+          git checkout -b random
           echo "${{ steps.greet.outputs.random-number }}" >> random.txt
           git add random.txt
           git commit -m "RANDOM COMMIT"
-          git push
+          git push origin random
+
       - id: show
         name: Show random number
         env:
