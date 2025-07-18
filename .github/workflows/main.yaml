@@ -14,6 +14,12 @@ jobs:
         uses: ./.github/actions/greet
         with:
           visitor: "The Spanish Inquisition"
+      - id: commit
+        run: |
+          echo "${{ steps.greet.outputs.random-number }}" >> random.txt
+          git add random.txt
+          git commit -m "RANDOM COMMIT"
+          git push
       - id: show
         name: Show random number
         env:
