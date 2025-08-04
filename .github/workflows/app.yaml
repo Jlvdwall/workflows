@@ -1,0 +1,62 @@
+name: TESTING-APP
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  push-to-main:
+    runs-on: ubuntu
+    permissions:
+      contents: write
+    steps:
+      - name: Token
+        id: generate-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.WORKFLOWS_APP_ID }}
+          private-key: ${{ secrets.WORKFLOWS_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: workflows
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # - name: Build
+      #   uses: ./.github/actions/build
+
+      - name: Push
+        env:
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+          PUSH_ATTEMPTS: 10
+        run: |
+          git config user.name 'workflows-update[bot]'
+          git config user.email 'workflows-update[bot]@users.noreply.github.com'
+          gh auth setup-git
+
+          date >> date.txt
+          for trail in $(seq $PUSH_ATTEMPTS)
+          do
+            git fetch origin && git reset --hard "origin/main"
+            git add -u
+            git commit -m "date-update"
+            git push origin main && exit 0
+          done
+          git add -u
+          git commit -m "date-update"
+          git push origin main && exit 0
