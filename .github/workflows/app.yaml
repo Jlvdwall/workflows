@@ -38,10 +38,10 @@ jobs:
           git config user.email 'workflows-update[bot]@users.noreply.github.com'
           gh auth setup-git
 
-          date >> date.txt
           for trail in $(seq $PUSH_ATTEMPTS)
           do
             git fetch origin && git reset --hard "origin/main"
+            date >> date.txt
             git add -u
             git commit -m "date-update"
             git push origin main && exit 0
