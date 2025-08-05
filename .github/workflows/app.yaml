@@ -3,7 +3,7 @@ name: TESTING-APP
 on:
   push:
     branches:
-      - main
+      - DISABLED
   workflow_dispatch:
 
 jobs:
