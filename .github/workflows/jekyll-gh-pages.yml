@@ -60,11 +60,11 @@ jobs:
           do
             git fetch origin && git reset --hard "origin/main"
             git add $name.txt
-            git commit -m "date-update"
+            git commit -m "[skip actions] date-update"
             git push origin main && exit 0
           done
           git add $name.txt
-          git commit -m "date-update"
+          git commit -m "[skip actions] date-update"
           git push origin main && exit 0
 
   # Build job
